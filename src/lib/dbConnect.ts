@@ -8,7 +8,7 @@ const connection: connectionObj = {};
 
 async function dbConnect(): Promise<void> {
   try {
-    const db = await mongoose.connect(process.env.MONGO_URI || "");
+    const db = await mongoose.connect(process.env.MONGO_URI || "", {});
 
     connection.isConnected = db.connections[0].readyState;
 
@@ -18,7 +18,7 @@ async function dbConnect(): Promise<void> {
   } catch (error) {
     console.log("Db connection Failed", error);
 
-    process.exit();
+    process.exit(1);
   }
 }
 
