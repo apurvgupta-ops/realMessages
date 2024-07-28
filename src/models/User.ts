@@ -72,8 +72,10 @@ const UserSchema: Schema<User> = new Schema({
   messages: [MessageSchema],
 });
 
-// Nextjs always run oin edge means nextjs dont know this schema runs for first time or already exists
+// Nextjs always run on edge means nextjs dont know this schema runs for first time or already exists (Next js is a edge time framework.)
 
 const UserModel =
   (mongoose.models.User as mongoose.Model<User>) ||
   mongoose.model("User", UserSchema);
+
+export default UserModel;
