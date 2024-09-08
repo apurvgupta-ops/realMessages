@@ -6,7 +6,7 @@ import { sendVerificationEmails } from "@/helpers/verificationEmail";
 export async function POST(req: Request) {
   await dbConnect();
   try {
-    const { userName, email, password } = await req.json();
+    const { userName, email, password } = await req.json(); // same as req.body
 
     const isUserNameVerified = await UserModel.findOne({
       userName,
@@ -29,8 +29,10 @@ export async function POST(req: Request) {
 
     const verificationCode = Math.floor(
       100000 + Math.random() * 900000
-    ).toString();
-    const verificationCodeExpiry = new Date();
+    ).toString(); // OTP
+
+    const verificationCodeExpiry = new Date(); // OTP Expiry
+
     verificationCodeExpiry.setHours(verificationCodeExpiry.getHours() + 1);
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -68,7 +70,7 @@ export async function POST(req: Request) {
       await createNewUser.save();
     }
 
-    // ?send verification email
+    // ? SEND VERIFICATION EMAIL
     const emailResponse = await sendVerificationEmails(
       userName,
       email,

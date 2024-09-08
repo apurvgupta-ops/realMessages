@@ -8,7 +8,8 @@ interface EmailTemplateProps {
 export default function EmailTemplate({ userName, otp }: EmailTemplateProps) {
   return (
     <div>
-      <h1>Welcome, {userName}!</h1>
+      <h1>Welcome, {userName}! </h1>
+      <p>Your Verification code is {otp}</p>
     </div>
   );
 }
